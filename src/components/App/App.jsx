@@ -1,4 +1,6 @@
-export const App = () => {
+import { NavLink, Route, Routes } from "react-router-dom";
+
+const App = () => {
   return (
     <div
       style={{
@@ -10,7 +12,14 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      React homework template
+      <nav>
+        <NavLink to="/">Home</NavLink>
+      </nav>
+      <Routes>
+        <Route></Route>
+      </Routes>
     </div>
   );
 };
+
+export default App;
