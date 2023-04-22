@@ -1,20 +1,21 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container, Header, Link } from "./SharedLayout.styled";
 
 export const SharedLayout = () => {
     return (
-        <div>
-            <header>
+        <Container>
+            <Header>
                 <nav>
-                    <NavLink to="/">Home</NavLink>
-                    <NavLink to="/Movies">Movies</NavLink>
+                    <Link to="/">Home</Link>
+                    <Link to="/Movies">Movies</Link>
                 </nav>
-            </header>
+            </Header>
             <main>
                 <Outlet />
             </main>
             <ToastContainer autoClose={3000} theme="colored"/>
-        </div>
+        </Container>
     );
 };

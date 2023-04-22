@@ -15,7 +15,7 @@ export const SearchbarEl = styled.header`
     padding-top: 5px;
     padding-bottom: 5px;
     color: #fff;
-    background-color: #e6dace;
+    background-color: #54c7a4;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
         0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 `;
@@ -46,7 +46,7 @@ export const SearchForm = styled(Form)`
         svg {
             width: 20px;
             height: 20px;
-            fill: #0a22aa;
+            fill: #217ba5;
         }
     }
     input {
