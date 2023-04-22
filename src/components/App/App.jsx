@@ -2,7 +2,7 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import Home from "../../pages/Home";
 import Movies from "pages/Movies";
 import MovieDitails from "pages/MovieDetails";
-import { SharedLayout } from "components/SharedLayout";
+import { SharedLayout } from "components/SharedLayout/SharedLayout";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="Movies" element={<Movies />} />
-          <Route path="Movies/:MovieId" element={<MovieDitails />} />
+          <Route path="Movies/:id" element={<MovieDitails />} />
         </Route> 
       </Routes>
   );

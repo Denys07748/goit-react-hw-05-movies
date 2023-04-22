@@ -8,7 +8,6 @@ const Movies = () => {
     const [query, setQuery] = useState('');
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if(query === '') {
@@ -19,25 +18,19 @@ const Movies = () => {
     }, [query]);
 
     const getMovies = async (query) => {
-        setIsLoading(true);
         try {
             const moviesData = await API.getMoviesByQuery(query);
              if(moviesData.results.length === 0) {
-                    setIsLoading(false);
-
-                    return toast.error('Sorry, there are no movies matching your search query. Please try again.');
+                return toast.error('Sorry, there are no movies matching your search query. Please try again.');
                 }
 
             setMovies(moviesData.results);
         } catch (error) {
             setError(error);
-        } finally {
-            setIsLoading(false);
-        }   
+        }  
     };
 
     const handleSearch = (searchQuery) => {
-        console.log(searchQuery);
         if(searchQuery === '') {
             toast.warn('The input field cannot be empty.');
         }

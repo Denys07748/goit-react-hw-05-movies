@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const MoviestList = ({movies}) => {
+const MoviestList = ({movies, isFromHome}) => {
+
     return (
         <ul>
-            {movies.map(({id, title}) => 
-                <li key={id}>
-                    <Link to={`${id}`}>{title}</Link>
-                </li>
+            {movies.map(({id, title}) => {
+                const path = `${isFromHome ? 'Movies/' : ''}${id}`;
+                return (
+                    <li key={id}>
+                        <Link to={path}>{title}</Link>
+                    </li>
+                )}
             )}
         </ul>
     )
@@ -20,4 +24,5 @@ MoviestList.propTypes = {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
     }),),
+    isFromHome: PropTypes.bool,
 }
