@@ -24,3 +24,19 @@ export const getMovieById = async id => {
 
   return response.data;
 };
+
+export const getMovieSubInfo = async (id, option) => {
+  const response = await axios.get(
+    `${BASE_URL}movie/${id}/${option}?api_key=${KEY}`
+  );
+
+  return response.data;
+};
+
+// export const getMovieImage = async id => {
+//   const response = await axios.get(
+//     `${BASE_URL}movie/${id}/images?api_key=${KEY}`
+//   );
+
+//   return response.data;
+// };

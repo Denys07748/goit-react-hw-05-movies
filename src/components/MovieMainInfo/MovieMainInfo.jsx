@@ -3,7 +3,7 @@ const MovieMainInfo = ({details}) => {
 
     return (
         <div>
-            <img src={poster_path} alt={title} />
+            <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} width="300" />
             <h2>{`${title} (${release_date.slice(0, 4)})`}</h2>
             <p></p>
             <h3>Overview</h3>
