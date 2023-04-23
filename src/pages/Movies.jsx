@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import MoviestList from "components/MoviesList/MoviesList";
 import Searchbar from "components/Searchbar/Searchbar";
 import * as API from 'services/ApiService';
+import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-    const [query, setQuery] = useState('');
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get('query') ?? '';
 
     useEffect(() => {
         if(query === '') {
@@ -37,7 +39,10 @@ const Movies = () => {
         if(query === searchQuery) {
             return;
         }
-        setQuery(searchQuery);
+
+        const nextParams = searchQuery !== '' ? { query: searchQuery } : {};
+        
+        setSearchParams(nextParams);
         setMovies([]); 
     } 
 

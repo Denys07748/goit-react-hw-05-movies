@@ -8,8 +8,12 @@ const Home = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
+        if(movies === []) {
+            return;
+        }
+
         getMovies();
-    }, []);
+    }, [movies]);
 
     const getMovies = async () => {
         try {

@@ -1,24 +1,24 @@
 import { toast } from 'react-toastify';
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import * as API from 'services/ApiService';
 import MovieMainInfo from 'components/MovieMainInfo/MovieMainInfo';
-import Cast from 'components/Cast/Cast';
-import Reviews from 'components/Reviews/Reviews';
+import BackLink from 'components/BackLink/BackLink';
 
 const MovieDitails = () => {
     const [details, setDetails] = useState({});
     const [error, setError] = useState('');
-
-    const { id } = useParams();
+    const { movieId } = useParams();
+    const location = useLocation();
+    const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
 
     useEffect(() => {
-        if(!id) {
+        if(!movieId) {
             return;
         }
 
-       getMovieDetails(id);
-    }, [id]);
+       getMovieDetails(movieId);
+    }, [movieId]);
 
     const getMovieDetails = async (id) => {
         try {
@@ -34,12 +34,20 @@ const MovieDitails = () => {
 
     return (
         <div>
+            <BackLink to={backLinkLocationRef.current}>Go back</BackLink>
             {details.id && <MovieMainInfo details={details} />}
             <p>Additional information</p>
             <ul>
-                <li><Cast /></li>
-                <li><Reviews /></li>
+                <li>
+                    <Link to="cast">Cast</Link>
+                </li>
+                <li>
+                    <Link to="reviews">Reviews</Link>
+                </li>
             </ul>
+            <Suspense fallback={<div>Loading subpage...</div>}>
+                    <Outlet />
+            </Suspense>
             {error && toast.error("Oops, an error occurred while loading the page. Please try reloading the page")}
         </div>
     )
