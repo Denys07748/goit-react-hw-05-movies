@@ -32,11 +32,3 @@ export const getMovieSubInfo = async (id, option) => {
 
   return response.data;
 };
-
-// export const getMovieImage = async id => {
-//   const response = await axios.get(
-//     `${BASE_URL}movie/${id}/images?api_key=${KEY}`
-//   );
-
-//   return response.data;
-// };

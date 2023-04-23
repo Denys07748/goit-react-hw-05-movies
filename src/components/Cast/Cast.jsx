@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import * as API from '../../services/ApiService';
+import * as API from 'services/ApiService';
 
 
 const Cast = () => {
