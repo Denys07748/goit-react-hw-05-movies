@@ -1,9 +1,10 @@
 import { toast } from 'react-toastify';
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import * as API from 'services/ApiService';
 import MovieMainInfo from 'components/MovieMainInfo/MovieMainInfo';
 import BackLink from 'components/BackLink/BackLink';
+import AddInfo from 'components/AddInfo/AddInfo';
 
 const MovieDitails = () => {
     const [details, setDetails] = useState({});
@@ -26,6 +27,7 @@ const MovieDitails = () => {
              if(movieDetails === {}) {
                 return toast.error('Sorry, there are no movies matching your search query. Please try again.');
                 }   
+                
             setDetails(movieDetails);
         } catch (error) {
             setError(error);
@@ -36,15 +38,7 @@ const MovieDitails = () => {
         <div>
             <BackLink to={backLinkLocationRef.current}>Go back</BackLink>
             {details.id && <MovieMainInfo details={details} />}
-            <p>Additional information</p>
-            <ul>
-                <li>
-                    <Link to="cast">Cast</Link>
-                </li>
-                <li>
-                    <Link to="reviews">Reviews</Link>
-                </li>
-            </ul>
+            <AddInfo />
             <Suspense fallback={<div>Loading subpage...</div>}>
                     <Outlet />
             </Suspense>

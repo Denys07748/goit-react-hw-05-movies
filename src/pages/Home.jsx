@@ -8,12 +8,8 @@ const Home = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        if(movies === []) {
-            return;
-        }
-
         getMovies();
-    }, [movies]);
+    }, []);
 
     const getMovies = async () => {
         try {
@@ -21,8 +17,7 @@ const Home = () => {
              if(moviesData.results.length === 0) {
                 return toast.error('Sorry, there are no images matching your search query. Please try again.');
                 }
-           
-
+       
             setMovies(moviesData.results);
         } catch (error) {
             setError(error);

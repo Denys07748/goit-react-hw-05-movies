@@ -8,15 +8,15 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
     const { movieId } = useParams();
     const [error, setError] = useState('');
-    const isLocationCast = useLocation().pathname.includes('reviews');
+    const isLocationReviews = useLocation().pathname.includes('reviews');
 
     useEffect(() => {
-        if(!isLocationCast) {
+        if(!isLocationReviews) {
             return;
         }
 
        getMovieReviews(movieId, 'reviews');
-    }, [movieId, isLocationCast]);
+    }, [movieId, isLocationReviews]);
 
     const getMovieReviews = async (id, option) => {
         try {
@@ -25,7 +25,6 @@ const Reviews = () => {
                 return toast.error('Sorry, there are no movies matching your search query. Please try again.');
                 } 
 
-            console.log(movieReviews.results);
             setReviews(movieReviews.results);
         } catch (error) {
             setError(error);
