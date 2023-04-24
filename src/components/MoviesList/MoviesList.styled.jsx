@@ -10,8 +10,14 @@ export const Container = styled.ul`
 `;
 
 export const MovieWrapper = styled.li`
-  border: 1px solid black;
+  border: 1px solid grey;
   border-radius: 4px;
+  background-color: #dfeeee;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 8px 10px rgba(0,0,0,0.2);
+
+  :hover {
+    scale: 1.05;
+  }
 
   > a {
     text-decoration: none;

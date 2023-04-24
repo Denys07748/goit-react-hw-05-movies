@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Section = styled.div`
-    border-bottom: 2px solid gray;
+    border-bottom: 3px solid gray;
 
     & p {
         font-weight: 500;
@@ -11,5 +11,10 @@ export const Section = styled.div`
     & a {
         text-decoration: none;
         font-weight: 500;
-    }
+
+        :hover,
+        :focus {
+            color: #110c2b;
+        }
+    }       
 `;
