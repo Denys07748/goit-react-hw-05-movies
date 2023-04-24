@@ -21,8 +21,8 @@ const Cast = () => {
     const getMovieCast = async (id, option) => {
         try {
             const movieCast = await API.getMovieSubInfo(id, option);
-            if(movieCast > 0) {
-                return toast.error('Sorry, there are no movies matching your search query. Please try again.');
+            if(movieCast.cast.length < 0) {
+                return toast.error('Sorry, we didn`t find any actors.');
                 } 
 
             setCast(movieCast.cast);
@@ -33,7 +33,7 @@ const Cast = () => {
 
     return (
         <div>
-            {cast.length > 0 ?
+            {cast.length > 0 &&
                 <ul>
                     {cast.map(({id, name, character, profile_path}) => 
                         <li key={id}>
@@ -47,7 +47,6 @@ const Cast = () => {
                         </li>
                     )}
                 </ul>
-                : <p>Sorry, we didn`t find any actors</p>
             }
            {error && toast.error("Oops, an error occurred while loading the page. Please try reloading the page")} 
         </div>

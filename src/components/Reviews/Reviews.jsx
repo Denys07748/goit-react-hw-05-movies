@@ -21,7 +21,7 @@ const Reviews = () => {
     const getMovieReviews = async (id, option) => {
         try {
             const movieReviews = await API.getMovieSubInfo(id, option);
-            if(movieReviews > 0) {
+            if(movieReviews.results.length < 0) {
                 return toast.error('Sorry, there are no movies matching your search query. Please try again.');
                 } 
 
@@ -33,7 +33,7 @@ const Reviews = () => {
 
     return (
        <div>
-            {reviews.length > 0 ?
+            {reviews.length > 0 &&
                 <ul>
                     {reviews.map(({id, author, content}) => 
                         <li key={id}>
@@ -42,7 +42,6 @@ const Reviews = () => {
                         </li>
                     )}
                 </ul>
-                : <p>We don`t have any reviews for this movies</p>
             }
            {error && toast.error("Oops, an error occurred while loading the page. Please try reloading the page")} 
         </div>
