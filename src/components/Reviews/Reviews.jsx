@@ -11,7 +11,7 @@ const Reviews = () => {
     const isLocationReviews = useLocation().pathname.includes('reviews');
 
     useEffect(() => {
-        if(!isLocationReviews) {
+        if(!isLocationReviews || !movieId) {
             return;
         }
 
@@ -21,8 +21,8 @@ const Reviews = () => {
     const getMovieReviews = async (id, option) => {
         try {
             const movieReviews = await API.getMovieSubInfo(id, option);
-            if(movieReviews.results.length < 0) {
-                return toast.error('Sorry, there are no movies matching your search query. Please try again.');
+            if(movieReviews.results.length === 0) {
+                return toast.error('We don`t have any reviews for this movies');
                 } 
 
             setReviews(movieReviews.results);

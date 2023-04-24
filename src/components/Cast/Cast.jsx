@@ -11,7 +11,7 @@ const Cast = () => {
     const isLocationCast = useLocation().pathname.includes('cast');
 
     useEffect(() => {
-        if(!isLocationCast) {
+        if(!isLocationCast || !movieId) {
             return;
         }
 
@@ -21,7 +21,7 @@ const Cast = () => {
     const getMovieCast = async (id, option) => {
         try {
             const movieCast = await API.getMovieSubInfo(id, option);
-            if(movieCast.cast.length < 0) {
+            if(movieCast.cast.length === 0) {
                 return toast.error('Sorry, we didn`t find any actors.');
                 } 
 

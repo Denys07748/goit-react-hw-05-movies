@@ -11,10 +11,11 @@ export const Section = styled.div`
     & a {
         text-decoration: none;
         font-weight: 500;
+        color: #120d2b;
 
         :hover,
         :focus {
-            color: #110c2b;
+            color: #6fc6d1;
         }
     }       
 `;
