@@ -5,6 +5,7 @@ import * as API from 'services/ApiService';
 import MovieMainInfo from 'components/MovieMainInfo/MovieMainInfo';
 import BackLink from 'components/BackLink/BackLink';
 import AddInfo from 'components/AddInfo/AddInfo';
+import Loader from 'components/Loader/Loader';
 
 const MovieDitails = () => {
     const [details, setDetails] = useState(null);
@@ -12,6 +13,7 @@ const MovieDitails = () => {
     const { movieId } = useParams();
     const location = useLocation();
     const backLinkLocationRef = useRef(location.state?.from ?? '/');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if(!movieId) {
@@ -22,6 +24,7 @@ const MovieDitails = () => {
     }, [movieId]);
 
     const getMovieDetails = async (id) => {
+        setIsLoading(true);
         try {
             const movieDetails = await API.getMovieById(id);
              if(movieDetails === {}) {
@@ -31,15 +34,18 @@ const MovieDitails = () => {
             setDetails(movieDetails);
         } catch (error) {
             setError(error);
-        }
+        } finally {
+            setIsLoading(false);
+        }  
     };
 
     return (
         <div>
             <BackLink to={backLinkLocationRef.current}>Go back</BackLink>
             {details && <MovieMainInfo details={details} />}
+            {isLoading && <Loader/>}
             <AddInfo />
-            <Suspense fallback={<div>Loading subpage...</div>}>
+            <Suspense fallback={<Loader/>}>
                     <Outlet />
             </Suspense>
             {error && toast.error("Oops, an error occurred while loading the page. Please try reloading the page")}

@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState } from "react";
 import MoviestList from "components/MoviesList/MoviesList";
 import Searchbar from "components/Searchbar/Searchbar";
+import Loader from 'components/Loader/Loader';
 import * as API from 'services/ApiService';
 import { useSearchParams } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ const Movies = () => {
     const [movies, setMovies] = useState(null);
     const [error, setError] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
+     const [isLoading, setIsLoading] = useState(false);
     const query = searchParams.get('query') ?? '';
 
     useEffect(() => {
@@ -20,6 +22,7 @@ const Movies = () => {
     }, [query]);
 
     const getMovies = async (query) => {
+        setIsLoading(true);
         try {
             const moviesData = await API.getMoviesByQuery(query);
              if(moviesData.results.length === 0) {
@@ -29,7 +32,9 @@ const Movies = () => {
             setMovies(moviesData.results);
         } catch (error) {
             setError(error);
-        }  
+        } finally {
+            setIsLoading(false);
+        } 
     };
 
     const handleSearch = (searchQuery) => {
@@ -49,6 +54,7 @@ const Movies = () => {
         <main>
             <Searchbar onSubmit={handleSearch} />
             {movies && <MoviestList movies={movies} />}
+            {isLoading && <Loader/>}
             {error && toast.error("Oops, an error occurred while loading the page. Please try reloading the page")}
         </main>
     )

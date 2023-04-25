@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, Header, Link } from "./SharedLayout.styled";
 import { Suspense } from "react";
+import Loader from 'components/Loader/Loader';
 
 export const SharedLayout = () => {
     return (
@@ -14,7 +15,7 @@ export const SharedLayout = () => {
                 </nav>
             </Header>
             <main>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loader/>}>
                     <Outlet />
                 </Suspense>
             </main>
