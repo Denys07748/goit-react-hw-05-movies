@@ -25,6 +25,8 @@ export const MovieWrapper = styled.li`
 
   & img {
     width: 197px;
+    height: 120px;
+    background-size: cover;
   }
 `;
 

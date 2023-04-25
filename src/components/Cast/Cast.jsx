@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as API from 'services/ApiService';
 import Loader from 'components/Loader/Loader';
+import defaultImage from 'images/default_actor_img.jpg';
 
 
 const Cast = () => {
@@ -43,7 +44,7 @@ const Cast = () => {
                         <li key={cast_id}>
                             <img src={profile_path
                                 ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                                : `https://m.media-amazon.com/images/S/sash/9FayPGLPcrscMjU.png`} 
+                                : defaultImage} 
                                 alt={name} 
                                 width={150} />
                             <p>{name}</p>
