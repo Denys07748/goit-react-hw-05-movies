@@ -7,11 +7,11 @@ import BackLink from 'components/BackLink/BackLink';
 import AddInfo from 'components/AddInfo/AddInfo';
 
 const MovieDitails = () => {
-    const [details, setDetails] = useState({});
+    const [details, setDetails] = useState(null);
     const [error, setError] = useState('');
     const { movieId } = useParams();
     const location = useLocation();
-    const backLinkLocationRef = useRef(location.state?.from ?? '/movies');
+    const backLinkLocationRef = useRef(location.state?.from ?? '/');
 
     useEffect(() => {
         if(!movieId) {
@@ -37,7 +37,7 @@ const MovieDitails = () => {
     return (
         <div>
             <BackLink to={backLinkLocationRef.current}>Go back</BackLink>
-            {details.id && <MovieMainInfo details={details} />}
+            {details && <MovieMainInfo details={details} />}
             <AddInfo />
             <Suspense fallback={<div>Loading subpage...</div>}>
                     <Outlet />

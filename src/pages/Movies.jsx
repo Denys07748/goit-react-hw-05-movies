@@ -6,7 +6,7 @@ import * as API from 'services/ApiService';
 import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-    const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState(null);
     const [error, setError] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get('query') ?? '';
@@ -42,14 +42,13 @@ const Movies = () => {
 
         const nextParams = searchQuery !== '' ? { query: searchQuery } : {};
         
-        setSearchParams(nextParams);
-        setMovies([]); 
+        setSearchParams(nextParams); 
     } 
 
     return (
         <main>
             <Searchbar onSubmit={handleSearch} />
-            <MoviestList movies={movies} />
+            {movies && <MoviestList movies={movies} />}
             {error && toast.error("Oops, an error occurred while loading the page. Please try reloading the page")}
         </main>
     )

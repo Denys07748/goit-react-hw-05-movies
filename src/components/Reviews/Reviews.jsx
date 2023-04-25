@@ -1,22 +1,21 @@
 import { toast } from 'react-toastify';
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as API from 'services/ApiService';
 
 
 const Reviews = () => {
-    const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState(null);
     const { movieId } = useParams();
     const [error, setError] = useState('');
-    const isLocationReviews = useLocation().pathname.includes('reviews');
 
     useEffect(() => {
-        if(!isLocationReviews || !movieId) {
+        if(!movieId) {
             return;
         }
 
        getMovieReviews(movieId, 'reviews');
-    }, [movieId, isLocationReviews]);
+    }, [movieId]);
 
     const getMovieReviews = async (id, option) => {
         try {
@@ -33,7 +32,7 @@ const Reviews = () => {
 
     return (
        <div>
-            {reviews.length > 0 &&
+            {reviews &&
                 <ul>
                     {reviews.map(({id, author, content}) => 
                         <li key={id}>

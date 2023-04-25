@@ -1,22 +1,21 @@
 import { toast } from 'react-toastify';
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as API from 'services/ApiService';
 
 
 const Cast = () => {
-    const [cast, setCast] = useState([]);
+    const [cast, setCast] = useState(null);
     const { movieId } = useParams();
     const [error, setError] = useState('');
-    const isLocationCast = useLocation().pathname.includes('cast');
 
     useEffect(() => {
-        if(!isLocationCast || !movieId) {
+        if(!movieId) {
             return;
         }
 
        getMovieCast(movieId, 'credits');
-    }, [movieId, isLocationCast]);
+    }, [movieId]);
 
     const getMovieCast = async (id, option) => {
         try {
@@ -33,11 +32,11 @@ const Cast = () => {
 
     return (
         <div>
-            {cast.length > 0 &&
+            {cast &&
                 <ul>
-                    {cast.map(({id, name, character, profile_path}) => 
-                        <li key={id}>
-                            <img src={ profile_path
+                    {cast.map(({cast_id, name, character, profile_path}) => 
+                        <li key={cast_id}>
+                            <img src={profile_path
                                 ? `https://image.tmdb.org/t/p/w500/${profile_path}`
                                 : `https://m.media-amazon.com/images/S/sash/9FayPGLPcrscMjU.png`} 
                                 alt={name} 
