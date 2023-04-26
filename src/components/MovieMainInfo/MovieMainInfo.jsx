@@ -11,7 +11,8 @@ const MovieMainInfo = ({details}) => {
                 `https://image.tmdb.org/t/p/w500/${poster_path}`
                 : defaultImage} 
                 alt={original_title} 
-                width="300" />
+                width="300"
+                height="450" />
             <div>
                 <h2>{`${original_title || title} (${release_date.slice(0, 4)})`}</h2>
                 <p>User score: {Math.round(vote_average*10)}%</p>
