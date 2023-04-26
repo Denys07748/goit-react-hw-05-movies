@@ -6,14 +6,13 @@ const NotFoundPage = styled.div`
     position: fixed;
 
     img {
-        position: relative;
         height: 100%;
         width: 100%;
     }
 
     a {
         position: relative;
-        top: -145px;
+        top: -150px;
         left: 47%;
         padding: 20px 60px;
         border-radius: 8px;
